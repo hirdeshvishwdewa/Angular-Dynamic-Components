@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
     this.apiService.post('/api/upload', formData)
     .subscribe((response) => {
          console.log('response received is ', response);
+    }, (error: any) => {
+      console.error(error);
     })
 }
 }

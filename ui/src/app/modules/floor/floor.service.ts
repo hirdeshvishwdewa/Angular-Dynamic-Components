@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ApiService } from '../shared/services/api.service';
 import { IFloorConfig, IPageConfig } from '../view/services/view.service';
+import { AppService } from '../shared/services/app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class FloorService implements OnDestroy{
   pages: IPageConfig[] = [];
 
   private subscriptions: Subscription = new Subscription();
-  constructor(private apiService: ApiService) { }
+  constructor(private app: AppService) { }
 
   init (initCallback: any) {
     this.subscriptions.add(this.getFloorConfiguration(initCallback));
@@ -22,7 +22,7 @@ export class FloorService implements OnDestroy{
   }
 
   getFloor (): Observable<any> {
-    return this.apiService.get('floor');
+    return this.app.api.get('floor');
   }
 
   private getFloorConfiguration(initCallback: any): Subscription {
